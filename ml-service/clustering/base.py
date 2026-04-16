@@ -4,12 +4,12 @@ IR-AIS Clustering — Shared Evaluation Utilities
 """
 
 from sklearn.metrics import silhouette_score, davies_bouldin_score
+import numpy as np
 
-def evaluate_clustering(X, labels, approach="base"):
+def evaluate_clustering(X, labels, approach="base", sample_size=2000, random_state=42):
     """
     Evaluate a fitted clustering model.
     """
-    # Silhouette Score and Davies-Bouldin require more than 1 cluster.
     n_clusters = len(set(labels)) - (1 if -1 in labels else 0)
     
     if n_clusters < 2:
@@ -19,8 +19,16 @@ def evaluate_clustering(X, labels, approach="base"):
             "n_clusters": n_clusters,
             "approach": approach
         }
+    
+    n = len(X)
+    if n > sample_size:
+        rng = np.random.default_rng(random_state)
+        idx = rng.choice(n, size=sample_size, replace=False)
+        X_sil, labels_sil = X[idx], labels[idx]
+    else:
+        X_sil, labels_sil = X, labels
         
-    sil = silhouette_score(X, labels)
+    sil = silhouette_score(X_sil, labels_sil)
     db = davies_bouldin_score(X, labels)
     
     return {

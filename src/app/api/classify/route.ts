@@ -19,18 +19,19 @@ export async function POST(request: NextRequest) {
     fs.writeFileSync(tmpFile, JSON.stringify(body));
 
     // Call Python prediction script
-    const scriptPath = path.join(process.cwd(), "ml-service");
+    const scriptPath = path.join(process.cwd(), "ml-service").replace(/\\/g, "/");
+    const tmpFilePy = tmpFile.replace(/\\/g, "/");
     const pythonScript = `
 import json, sys
 sys.path.insert(0, '${scriptPath}')
 from predict import classify, predict_auxiliary
-features = json.load(open('${tmpFile}'))
+features = json.load(open('${tmpFilePy}'))
 result_cls = classify(features)
 result_aux = predict_auxiliary(features)
 print(json.dumps({"classification": result_cls, "auxiliary": result_aux}))
 `;
 
-    const result = execFileSync("python3", ["-c", pythonScript], {
+    const result = execFileSync("python", ["-c", pythonScript], {
       timeout: 30000,
       encoding: "utf-8",
     });

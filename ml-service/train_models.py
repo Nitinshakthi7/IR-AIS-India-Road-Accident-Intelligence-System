@@ -197,10 +197,15 @@ def train_clustering(X):
     best_sil = -1
     best_k = 2
     
+    sample_size = min(2000, len(X))
+    rng = np.random.default_rng(RANDOM_STATE)
+    sil_idx = rng.choice(len(X), size=sample_size, replace=False)
+    X_sil = X[sil_idx]
+    
     for k in range(2, 7):
         km = KMeans(n_clusters=k, random_state=RANDOM_STATE)
         lbls = km.fit_predict(X)
-        sil = silhouette_score(X, lbls)
+        sil = silhouette_score(X_sil, lbls[sil_idx])
         print(f"    K={k}, Silhouette Score: {sil:.4f}")
         if sil > best_sil:
             best_sil = sil
@@ -328,7 +333,10 @@ def train_auxiliary_tasks(X_raw_df, label_encoders):
         
         from sklearn.metrics import silhouette_score, davies_bouldin_score
         labels = kmeans.labels_
-        sil = silhouette_score(X_driver_scaled, labels)
+        sample_size = min(2000, len(X_driver_scaled))
+        rng = np.random.default_rng(RANDOM_STATE)
+        idx = rng.choice(len(X_driver_scaled), size=sample_size, replace=False)
+        sil = silhouette_score(X_driver_scaled[idx], labels[idx])
         db = davies_bouldin_score(X_driver_scaled, labels)
         
         print(f"  K-Means Silhouette Score: {sil:.4f}, Davies-Bouldin: {db:.4f}")

@@ -46,7 +46,7 @@ To observe spatial variance, we mathematically squashed the dataset down to just
 | Naive Bayes | **0.7753** | 0.8446 | 0.7437 | 0.8446 | 0.5835 |
 | Logistic Regression | **0.7751** | 0.8458 | 0.7153 | 0.8458 | 0.5852 |
 | SVM | **0.7751** | 0.8458 | 0.7153 | 0.8458 | 0.5862 |
-| Random Forest | **0.7751** | 0.8458 | 0.7153 | 0.8458 | 0.5792 |
+| Random Forest | **0.7751** | 0.8458 | 0.7153 | 0.8458 | 0.5783 |
 | AdaBoost | **0.7751** | 0.8458 | 0.7153 | 0.8458 | 0.5260 |
 | SVM (SMOTE) | **0.7193** | 0.6928 | 0.7530 | 0.6928 | 0.5595 |
 | KNN (SMOTE) | **0.5911** | 0.5150 | 0.7445 | 0.5150 | 0.5235 |
@@ -99,7 +99,7 @@ Evaluated the raw scaled features without providing any labels to determine if u
 
 | Model | Silhouette Score | Davies-Bouldin | Clusters Formed |
 |---|---|---|---|
-| K-Means | **0.0732** | 3.6879 | 3 |
+| K-Means | **0.0710** | 3.6879 | 3 |
 | DBSCAN | **-1.0000** | -1.0000 | 0 |
 
 > **Analytical Insight**: The best native partitioning is done by **K-Means**. While DBSCAN attempts to isolate noise based strictly on point density, high dimensional features usually look incredibly sparse (The curse of dimensionality). Subsequently, K-Means will reliably generate a higher mechanical Silhouette metric, though it forcibly segments spheres which may lack real-world significance compared to density separation.
@@ -179,7 +179,7 @@ These peripheral dimensions were individually isolated and predicted using isola
 ### Task: Driver Profile Risk (Clustering)
 | Model | Silhouette Score | Davies-Bouldin | Clusters Formed |
 |---|---|---|---|
-| K-Means (3 Clusters) | **0.3590** | 1.2280 | 3 |
+| K-Means (3 Clusters) | **0.3575** | 1.2280 | 3 |
 
 ---
 ## 6. Global Best Models Summary

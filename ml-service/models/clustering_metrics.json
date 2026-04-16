@@ -1,6 +1,6 @@
 {
   "K-Means": {
-    "silhouette_score": 0.0732,
+    "silhouette_score": 0.071,
     "davies_bouldin": 3.6879,
     "n_clusters": 3,
     "approach": "optimized"

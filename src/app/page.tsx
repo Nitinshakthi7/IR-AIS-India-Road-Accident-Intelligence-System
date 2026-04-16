@@ -85,7 +85,6 @@ import { ALL_FEATURE_OPTIONS, ALL_FEATURES } from "@/frontend/lib/feature-option
 import { LandingHero } from "@/frontend/components/LandingHero";
 import { CustomPathway } from "@/frontend/components/PathwayLine";
 import { NarrativeJourney } from "@/frontend/components/NarrativeJourney";
-import { FloatingSafeRoadsCoin } from "@/frontend/components/FloatingSafeRoadsCoin";
 import { FooterIllustration } from "@/frontend/components/FooterIllustration";
 import Image from "next/image";
 
@@ -186,7 +185,24 @@ const tooltipStyle: React.CSSProperties = {
   padding: "8px 12px",
 };
 
-const axisTickStyle = { fill: "#4b4b4b", fontSize: 11, fontWeight: 500 };
+const axisTickStyle = { fill: "#1a1a1a", fontSize: 11, fontWeight: 700 };
+
+// Shared high-contrast Pie label renderer
+const renderCustomPieLabel = ({ name, percent, x, y, cx }: any) => {
+  return (
+    <text 
+      x={x} 
+      y={y} 
+      fill="#1a1a1a" 
+      textAnchor={x > cx ? 'start' : 'end'} 
+      dominantBaseline="central"
+      fontSize="12"
+      fontWeight="700"
+    >
+      {`${name} ${(percent * 100).toFixed(0)}%`}
+    </text>
+  );
+};
 
 // ─── Helper Components ──────────────────────────────────────────────
 
@@ -369,7 +385,7 @@ function AgeSeverityChart({ data }: { data: AgeItem[] }) {
 
   return (
     <ResponsiveContainer width="100%" height={350}>
-      <BarChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+      <BarChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
         <CartesianGrid strokeDasharray="3 3" stroke="#ebdec5" vertical={false} />
         <XAxis dataKey="age" tick={axisTickStyle} axisLine={{ stroke: '#000', strokeWidth: 1 }} />
         <YAxis tick={axisTickStyle} axisLine={{ stroke: '#000', strokeWidth: 1 }} />
@@ -480,16 +496,15 @@ function DashboardTab() {
     <div className="space-y-10 pb-20">
       {/* Hero Banner - Redesigned */}
       <section className="relative overflow-hidden rounded-3xl border-[3px] border-black bg-white p-8 md:p-12 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] animate-fade-in-up">
-        {/* Decorative elements */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full -mr-32 -mt-32 blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-48 h-48 bg-secondary/40 rounded-full -ml-24 -mb-24 blur-3xl" />
+        {/* Decorative elements with improved depth */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/30 rounded-full -mr-32 -mt-32 blur-3xl opacity-60" />
+        <div className="absolute bottom-0 left-0 w-48 h-48 bg-secondary/60 rounded-full -ml-24 -mb-24 blur-3xl opacity-40" />
         
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-12">
           <div className="max-w-2xl">
-            <div className="flex items-center gap-3 text-black font-bold uppercase tracking-[0.2em] text-xs mb-6">
+            <div className="flex items-center gap-3 text-black font-bold uppercase tracking-[0.2em] text-xs mb-6 px-3 py-1 bg-white/50 backdrop-blur-sm border-2 border-black rounded-lg w-fit shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
               <Activity className="h-4 w-4 text-primary" />
               <span>Exploratory Data Analysis</span>
-              <div className="h-px w-12 bg-black/10" />
             </div>
             <h2 className="editorial-title mb-6 leading-[1.1]">
               Deciphering the <br/>
@@ -570,9 +585,7 @@ function DashboardTab() {
                 paddingAngle={4}
                 stroke="#000"
                 strokeWidth={2}
-                label={({ name, percent }: { name: string; percent: number }) =>
-                  `${name} ${(percent * 100).toFixed(0)}%`
-                }
+                label={renderCustomPieLabel}
               >
                 {edaData.severity_distribution.map((entry, index) => {
                    const colors: Record<string, string> = {
@@ -580,7 +593,7 @@ function DashboardTab() {
                      "Serious Injury": "#d4a843",
                      "Slight Injury": "#6bc4b3"
                    };
-                   return <Cell key={index} fill={colors[entry.name] || entry.color} />;
+                   return <Cell key={index} fill={colors[entry.name] || entry.color} stroke="#000" strokeWidth={1} />;
                 })}
               </Pie>
               <Tooltip contentStyle={tooltipStyle} />
@@ -595,7 +608,7 @@ function DashboardTab() {
           accentColor="amber"
         >
           <ResponsiveContainer width="100%" height={350}>
-            <AreaChart data={edaData.peak_hours} margin={{ top: 10, right: 10, left: 0, bottom: 20 }}>
+            <AreaChart data={edaData.peak_hours} margin={{ top: 10, right: 10, left: 10, bottom: 40 }}>
               <defs>
                 <linearGradient id="hourGradient" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stopColor="#d4a843" stopOpacity={0.4} />
@@ -623,7 +636,7 @@ function DashboardTab() {
           accentColor="violet"
         >
           <ResponsiveContainer width="100%" height={350}>
-            <BarChart data={edaData.day_distribution} margin={{ top: 10, right: 30, left: 0, bottom: 40 }}>
+            <BarChart data={edaData.day_distribution} margin={{ top: 10, right: 30, left: 10, bottom: 50 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#ebdec5" vertical={false} />
               <XAxis 
                 dataKey="day" 
@@ -672,7 +685,7 @@ function DashboardTab() {
             <BarChart
               data={edaData.vehicle_type_distribution}
               layout="vertical"
-              margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+              margin={{ top: 5, right: 30, left: 20, bottom: 30 }}
             >
               <CartesianGrid strokeDasharray="3 3" stroke="#ebdec5" horizontal={false} />
               <XAxis type="number" tick={axisTickStyle} axisLine={{stroke: '#000'}} height={50}>
@@ -709,7 +722,7 @@ function DashboardTab() {
             <BarChart
               data={edaData.cause_distribution}
               layout="vertical"
-              margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+              margin={{ top: 5, right: 30, left: 20, bottom: 30 }}
             >
               <CartesianGrid strokeDasharray="3 3" stroke="#ebdec5" horizontal={false} />
               <XAxis type="number" tick={axisTickStyle} axisLine={{stroke: '#000'}} height={50}>
@@ -755,7 +768,7 @@ function DashboardTab() {
             <BarChart
               data={edaData.collision_distribution}
               layout="vertical"
-              margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+              margin={{ top: 5, right: 30, left: 20, bottom: 30 }}
             >
               <CartesianGrid strokeDasharray="3 3" stroke="#ebdec5" horizontal={false} />
               <XAxis type="number" tick={axisTickStyle} axisLine={{stroke: '#000'}} height={50}>
@@ -800,13 +813,10 @@ function DashboardTab() {
                 innerRadius={60}
                 paddingAngle={8}
                 stroke="#000"
-                strokeWidth={2}
-                label={({ name, percent }: { name: string; percent: number }) =>
-                  `${name} ${(percent * 100).toFixed(0)}%`
-                }
+                label={renderCustomPieLabel}
               >
-                <Cell fill="#6bc4b3" />
-                <Cell fill="#e2e8f0" />
+                <Cell fill="#6bc4b3" stroke="#000" strokeWidth={1} />
+                <Cell fill="#ebdec5" stroke="#000" strokeWidth={1} />
               </Pie>
               <Tooltip contentStyle={tooltipStyle} />
             </PieChart>
@@ -829,9 +839,9 @@ function DashboardTab() {
           accentColor="rose"
         >
           <ResponsiveContainer width="100%" height={350}>
-            <BarChart data={edaData.casualty_distribution} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+            <BarChart data={edaData.casualty_distribution} margin={{ top: 10, right: 30, left: 10, bottom: 30 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#ebdec5" vertical={false} />
-              <XAxis dataKey="count" tick={axisTickStyle} label={{ value: 'Casualties', position: 'insideBottom', offset: -5, fontSize: 10, fontWeight: 'bold' }} axisLine={{stroke: '#000'}} />
+              <XAxis dataKey="count" tick={axisTickStyle} label={{ value: 'Casualties', position: 'insideBottom', offset: -15, fontSize: 11, fontWeight: 'bold', fill: '#1a1a1a' }} axisLine={{stroke: '#000'}} />
               <YAxis tick={axisTickStyle} axisLine={{stroke: '#000'}} />
               <Tooltip contentStyle={tooltipStyle} cursor={{ fill: 'rgba(0,0,0,0.05)' }} />
               <Bar
@@ -874,7 +884,7 @@ function DashboardTab() {
             <BarChart
               data={edaData.defect_distribution}
               layout="vertical"
-              margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+              margin={{ top: 5, right: 30, left: 20, bottom: 30 }}
             >
               <CartesianGrid strokeDasharray="3 3" stroke="#ebdec5" horizontal={false} />
               <XAxis type="number" tick={axisTickStyle} axisLine={{stroke: '#000'}} />
@@ -908,7 +918,7 @@ function DashboardTab() {
             <BarChart
               data={edaData.area_distribution}
               layout="vertical"
-              margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+              margin={{ top: 5, right: 30, left: 20, bottom: 30 }}
             >
               <CartesianGrid strokeDasharray="3 3" stroke="#ebdec5" horizontal={false} />
               <XAxis type="number" tick={axisTickStyle} axisLine={{stroke: '#000'}} />
@@ -1215,10 +1225,10 @@ function ClassificationModels({ data }: { data: ClassModel[] }) {
                           isBest ? "bg-primary/10" : "hover:bg-secondary/20"
                         )}
                       >
-                        <td className="py-4 px-3 font-bold border-y border-transparent">
+                        <td className="py-4 px-3 font-bold border-y border-transparent min-w-[200px]">
                           <div className="flex items-center gap-2">
                             {isBest && <Star className="h-4 w-4 text-black fill-primary" />}
-                            <span className={cn(isBest && "text-black")}>{model.name}</span>
+                            <span className={cn("line-clamp-1", isBest && "text-black")}>{model.name}</span>
                           </div>
                         </td>
                         <td className="py-4 px-3 text-center">
@@ -1857,7 +1867,11 @@ function CasualtyResult({
         {/* Person icons for visual representation */}
         <div className="flex items-center gap-2 mt-2">
           {Array.from({ length: Math.min(count, 8) }).map((_, i) => (
-            <div key={i} className={cn("h-6 w-6 rounded-full border-2 border-black flex items-center justify-center", bg)}>
+            <div 
+              key={i} 
+              className={cn("h-6 w-6 rounded-full border-2 border-black flex items-center justify-center animate-pop-in", bg)}
+              style={{ animationDelay: `${i * 0.1}s` }}
+            >
               <div className="h-2 w-2 rounded-full bg-current opacity-50" />
             </div>
           ))}
@@ -2025,7 +2039,7 @@ function LivePredictorTab() {
 
   // Count filled fields
   const filledCount = Object.keys(formData).filter((k) => formData[k]).length;
-  const totalFields = ALL_FEATURES.length;
+  const totalFields = fieldGroups.reduce((acc, group) => acc + group.fields.length, 0);
 
   return (
     <div className="space-y-10">
@@ -2131,7 +2145,10 @@ function LivePredictorTab() {
             <button
               onClick={handleSubmit}
               disabled={loading || filledCount === 0}
-              className="fp-button-active flex-1 bg-black text-primary font-bold uppercase tracking-widest text-xs h-14"
+              className={cn(
+                "fp-button-active flex-1 bg-black text-primary font-bold uppercase tracking-widest text-xs h-14 relative overflow-hidden",
+                !loading && filledCount > 0 && "hover:after:content-[''] hover:after:absolute hover:after:inset-0 hover:after:animate-shimmer"
+              )}
             >
               {loading ? (
                 <Loader2 className="h-4 w-4 animate-spin mr-2" />
@@ -2197,16 +2214,18 @@ function LivePredictorTab() {
                     {Object.entries(result.auxiliary).map(([taskName, data]) => {
                       if (data.error) return null;
                       return (
-                        <div key={taskName} className="p-4 bg-secondary/10 border-2 border-black/10 rounded-xl relative group hover:border-black/30 transition-colors">
-                          <p className="text-[10px] font-bold text-black/50 uppercase tracking-widest mb-2">{taskName}</p>
-                          <p className="font-bold text-base leading-tight text-black line-clamp-2">
+                        <div key={taskName} className="p-5 bg-secondary/5 border-2 border-black/10 rounded-2xl group hover:border-black/30 transition-all hover:bg-white flex flex-col min-h-[120px] shadow-sm hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                          <div className="flex items-start justify-between gap-4 mb-3">
+                            <p className="text-[9px] font-bold text-black/50 uppercase tracking-widest leading-relaxed pt-1 flex-1">{taskName}</p>
+                            {data.confidence && (
+                              <div className="flex-shrink-0 bg-white px-2 py-1 rounded-sm border border-black/10 text-[8px] font-bold text-primary shadow-sm whitespace-nowrap leading-none mt-1">
+                                {(data.confidence * 100).toFixed(0)}% Score
+                              </div>
+                            )}
+                          </div>
+                          <p className="font-bold text-sm md:text-base leading-tight text-black group-hover:text-primary transition-colors">
                             {data.prediction}
                           </p>
-                          {data.confidence && (
-                            <div className="absolute top-4 right-4 bg-white px-2 py-1 rounded border border-black/10 text-[9px] font-bold text-primary shadow-sm">
-                              {(data.confidence * 100).toFixed(1)}% Score
-                            </div>
-                          )}
                         </div>
                       );
                     })}
@@ -2247,9 +2266,6 @@ function HomePageContent() {
   if (!tabParam || tabParam === "home") {
     return (
       <div className="min-h-screen flex flex-col bg-[#FFFaf5] selection:bg-primary/30">
-        {/* Floating coin — landing page only */}
-        <FloatingSafeRoadsCoin isVisible={true} />
-
         {/* Hero section */}
         <LandingHero />
 
