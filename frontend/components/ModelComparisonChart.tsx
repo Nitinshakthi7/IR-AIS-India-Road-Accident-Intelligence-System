@@ -31,11 +31,11 @@ export function ModelComparisonChart({ data }: ModelComparisonChartProps) {
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-border">
-                <th className="text-left py-3 px-2 text-muted-foreground font-medium">Model</th>
-                <th className="text-right py-3 px-2 text-muted-foreground font-medium">Accuracy</th>
-                <th className="text-right py-3 px-2 text-muted-foreground font-medium">F1 Score</th>
-                <th className="text-right py-3 px-2 text-muted-foreground font-medium">Precision</th>
-                <th className="text-right py-3 px-2 text-muted-foreground font-medium">Recall</th>
+                <th className="text-left py-3 px-2 text-black font-bold uppercase tracking-wider">Model</th>
+                <th className="text-right py-3 px-2 text-black font-bold uppercase tracking-wider">Accuracy</th>
+                <th className="text-right py-3 px-2 text-black font-bold uppercase tracking-wider">F1 Score</th>
+                <th className="text-right py-3 px-2 text-black font-bold uppercase tracking-wider">Precision</th>
+                <th className="text-right py-3 px-2 text-black font-bold uppercase tracking-wider">Recall</th>
               </tr>
             </thead>
             <tbody>

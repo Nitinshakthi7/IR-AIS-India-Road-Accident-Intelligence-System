@@ -53,8 +53,8 @@ export function LandingHero() {
                 Enter Dashboard
                 <ArrowRight className="h-5 w-5" />
               </button>
-              <div className="flex items-center gap-4 text-sm font-bold uppercase tracking-widest text-black/40">
-                <MousePointerClick className="h-4 w-4" />
+              <div className="flex items-center gap-4 text-sm font-bold uppercase tracking-widest text-black/60">
+                <MousePointerClick className="h-4 w-4 opacity-70" />
                 <span>Scroll to explore</span>
               </div>
             </div>

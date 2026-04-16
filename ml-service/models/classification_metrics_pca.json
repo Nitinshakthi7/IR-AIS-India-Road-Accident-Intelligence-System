@@ -147,7 +147,7 @@
       ]
     ],
     "approach": "base",
-    "roc_auc_ovr": 0.5792
+    "roc_auc_ovr": 0.5783
   },
   "AdaBoost": {
     "accuracy": 0.8458,
