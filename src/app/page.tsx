@@ -79,6 +79,7 @@ import {
   Flame,
   Calendar,
   Route,
+  Heart,
 } from "lucide-react";
 import { ALL_FEATURE_OPTIONS, ALL_FEATURES } from "@/frontend/lib/feature-options";
 import { LandingHero } from "@/frontend/components/LandingHero";
@@ -2272,16 +2273,34 @@ function HomePageContent() {
         {/* Footer illustration */}
         <FooterIllustration />
 
-        <footer className="border-t border-border/50 bg-card/20">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <ShieldAlert className="h-4 w-4 text-primary" />
-                <span>IR-AIS &mdash; India Road Accident Intelligence System</span>
+        <footer className="border-t-[3px] border-black bg-white">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center gap-3">
+                  <div className="h-8 w-8 bg-black text-white flex items-center justify-center rounded-lg">
+                    <ShieldAlert className="h-4 w-4" />
+                  </div>
+                  <span className="text-lg font-serif font-bold text-black tracking-tight">
+                    IR-AIS <span className="text-black/30 font-sans font-medium text-sm ml-2">India Road Accident Intelligence System</span>
+                  </span>
+                </div>
+                <p className="text-xs font-medium text-black/50 ml-0 md:ml-11 max-w-sm text-center md:text-left">
+                  A data-driven initiative dedicated to analyzing patterns and predicting risks to make Indian roads safer for everyone.
+                </p>
               </div>
-              <p className="text-sm text-muted-foreground">
-                Built with Next.js, Recharts &amp; Machine Learning
-              </p>
+
+              <div className="flex flex-col items-center md:items-end gap-3">
+                <p className="text-sm font-medium text-black/70 flex flex-wrap justify-center items-center gap-2 bg-[#FFFaf5] px-4 py-2 rounded-full border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                  Built with <Heart className="h-3 w-3 text-red-500 fill-red-500" /> for every journey 
+                  <span className="h-1 w-1 rounded-full bg-black/20" />
+                  <span>Data Intelligence &</span>
+                  <span className="italic font-serif">Compassion</span>
+                </p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-black/30">
+                  © {new Date().getFullYear()} — Towards Zero Accidents
+                </p>
+              </div>
             </div>
           </div>
         </footer>
@@ -2344,16 +2363,34 @@ function HomePageContent() {
       {/* Footer illustration */}
       <FooterIllustration />
 
-      <footer className="border-t border-border/50 bg-card/20 mt-auto">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <ShieldAlert className="h-4 w-4 text-primary" />
-              <span>IR-AIS &mdash; India Road Accident Intelligence System</span>
+      <footer className="border-t-[3px] border-black bg-white mt-auto">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-3">
+                <div className="h-8 w-8 bg-black text-white flex items-center justify-center rounded-lg">
+                  <ShieldAlert className="h-4 w-4" />
+                </div>
+                <span className="text-lg font-serif font-bold text-black tracking-tight">
+                  IR-AIS <span className="text-black/30 font-sans font-medium text-sm ml-2">India Road Accident Intelligence System</span>
+                </span>
+              </div>
+              <p className="text-xs font-medium text-black/50 ml-0 md:ml-11 max-w-sm text-center md:text-left">
+                A data-driven initiative dedicated to analyzing patterns and predicting risks to make Indian roads safer for everyone.
+              </p>
             </div>
-            <p className="text-sm text-muted-foreground">
-              Built with Next.js, Recharts &amp; Machine Learning
-            </p>
+
+            <div className="flex flex-col items-center md:items-end gap-3">
+              <p className="text-sm font-medium text-black/70 flex flex-wrap justify-center items-center gap-2 bg-[#FFFaf5] px-4 py-2 rounded-full border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                Built with <Heart className="h-3 w-3 text-red-500 fill-red-500" /> for every journey 
+                <span className="h-1 w-1 rounded-full bg-black/20" />
+                <span>Data Intelligence &</span>
+                <span className="italic font-serif">Compassion</span>
+              </p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-black/30">
+                © {new Date().getFullYear()} — Towards Zero Accidents
+              </p>
+            </div>
           </div>
         </div>
       </footer>
