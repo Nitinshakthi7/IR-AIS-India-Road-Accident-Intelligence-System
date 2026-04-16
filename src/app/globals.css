@@ -1,0 +1,357 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-serif: var(--font-playfair);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --radius: 1rem; /* More rounded for the new aesthetic */
+  
+  /* Five Pathways inspired warm cream palette */
+  --background: #FFFaf5;
+  --foreground: #1a1a1a;
+  
+  --card: #FFFcf9;
+  --card-foreground: #1a1a1a;
+  
+  --popover: #FFFcf9;
+  --popover-foreground: #1a1a1a;
+  
+  --primary: #6bc4b3; /* Teal accent */
+  --primary-foreground: #1a1a1a;
+  
+  --secondary: #ebdec5; /* Warm beige */
+  --secondary-foreground: #3d3d3d;
+  
+  --muted: #f2e9d9;
+  --muted-foreground: #6b6b6b;
+  
+  --accent: #6bc4b3;
+  --accent-foreground: #1a1a1a;
+  
+  --destructive: #e05a47; /* Red accent */
+  --destructive-foreground: #ffffff;
+  
+  --border: #1a1a1a; /* Explicit black borders */
+  --input: #ebdec5;
+  --ring: #6bc4b3;
+  
+  /* Chart colors adapted for warm light background */
+  --chart-1: #6bc4b3; /* Teal */
+  --chart-2: #e05a47; /* Coral/Red */
+  --chart-3: #d4a843; /* Warm gold */
+  --chart-4: #4a6fa5; /* Dusty blue */
+  --chart-5: #8c729c; /* Soft purple */
+  
+  --sidebar: #ebdec5;
+  --sidebar-foreground: #1a1a1a;
+  --sidebar-primary: #6bc4b3;
+  --sidebar-primary-foreground: #1a1a1a;
+  --sidebar-accent: #FFFaf5;
+  --sidebar-accent-foreground: #1a1a1a;
+  --sidebar-border: #1a1a1a;
+  --sidebar-ring: #6bc4b3;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+/* Custom scrollbar styling - warm theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--secondary);
+  border: 2px solid var(--background);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
+
+/* ── Five Pathways Aesthetic Utilities ── */
+
+/* Thick border card with hard shadow */
+.fp-card {
+  @apply bg-card border-2 border-black rounded-2xl p-6 transition-all duration-200;
+  box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 1);
+}
+
+.fp-card-hover:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0px 0px rgba(0, 0, 0, 1);
+}
+
+/* Pill button with border and shadow */
+.fp-button {
+  @apply rounded-full border-2 border-black px-6 py-2 font-medium flex items-center gap-2 transition-all duration-150;
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+}
+
+.fp-button:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 1);
+}
+
+.fp-button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 1);
+}
+
+.fp-button-primary {
+  @apply bg-primary hover:bg-[#5bb2a2];
+}
+
+.fp-button-secondary {
+  @apply bg-secondary hover:bg-[#dfd0b5];
+}
+
+/* Tab pills - Five Pathways style */
+.tab-pill {
+  @apply px-5 py-2 text-sm font-semibold rounded-full border-2 border-black transition-all duration-200 cursor-pointer;
+}
+
+.tab-pill-active {
+  @apply bg-primary text-black;
+  box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 1);
+}
+
+.tab-pill-inactive {
+  @apply bg-transparent text-black border-black/20 hover:border-black;
+}
+
+/* Editorial Headlines */
+.editorial-title {
+  @apply font-serif tracking-tighter leading-[1.05];
+  font-size: clamp(2.5rem, 8vw, 7rem);
+}
+
+.editorial-subtitle {
+  @apply text-base md:text-lg font-sans text-muted-foreground uppercase tracking-[0.3em] font-bold;
+}
+
+/* ── Legacy Support / Adaptation ── */
+
+.hero-gradient {
+  background: linear-gradient(135deg, #FFFaf5 0%, #ebdec5 100%);
+}
+
+.amber-glow {
+  box-shadow: 4px 4px 0px 0px #6bc4b3;
+}
+
+.card-hover { opacity: 1; } /* Handled by fp-card classes */
+
+/* Stat gradients adapted to warm colors */
+.stat-gradient-blue { background: #e8f4f2; }
+.stat-gradient-emerald { background: #f0f7f0; }
+.stat-gradient-red { background: #fdf2f0; }
+.stat-gradient-amber { background: #fef9ed; }
+
+/* ── Animations ── */
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-on-scroll.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.parallax-bg {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.animate-fade-in-up {
+  animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.stagger-children > * {
+  opacity: 0;
+  animation: fadeSlideUp 0.5s ease forwards;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
+
+/* ── Form section with left accent border ── */
+.form-section {
+  @apply border-l-[3px] border-black pl-5 py-2 mb-6;
+}
+
+.form-section:hover {
+  @apply bg-secondary/30;
+  border-radius: 0 0.75rem 0.75rem 0;
+}
+
+/* ── Custom tooltip for recharts ── */
+.custom-tooltip {
+  background: white;
+  border: 2px solid black;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+}
+/* ── Pathway Line ── */
+.path-line {
+  stroke: #1a1a1a;
+  stroke-width: 2;
+  stroke-dasharray: 8 8;
+  fill: none;
+  stroke-linecap: round;
+  filter: drop-shadow(2px 2px 0px rgba(107, 196, 179, 0.4));
+}
+
+@keyframes drawPath {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-draw-path {
+  stroke-dashoffset: 1000;
+  animation: drawPath 5s linear infinite;
+}
+
+/* Sticker/Badge Style */
+.fp-sticker {
+  @apply inline-flex items-center gap-1.5 px-3 py-1 bg-white border-2 border-black rounded-lg text-[10px] font-bold uppercase tracking-wider shadow-[3px_3px_0px_0px_rgba(0,0,0,1)];
+}
+
+/* ── Narrative Card Reveal (Vanilla IntersectionObserver) ── */
+
+.narrative-card {
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.narrative-card-left {
+  transform: translateX(-40px);
+}
+
+.narrative-card-right {
+  transform: translateX(40px);
+}
+
+.narrative-card-scale {
+  transform: scale(0.92);
+}
+
+.narrative-card.is-visible {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+
+/* ── Floating Coin — lightweight CSS bounce ── */
+
+@keyframes bounceSlow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.animate-bounce-slow {
+  animation: bounceSlow 3s ease-in-out infinite;
+}
+
+/* ── fp-button active/inactive state ── */
+.fp-button-active {
+  @apply rounded-full flex items-center justify-center gap-2 transition-all duration-150;
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+}
+
+.fp-button-active:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 1);
+}
+
+.fp-button-active:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 1);
+}
+
+.fp-button-inactive {
+  @apply rounded-full border-2 border-black flex items-center justify-center gap-2 transition-all duration-150;
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+}
+
+/* ── Fade-in animation (used in results) ── */
+.animate-fade-in {
+  animation: fadeSlideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}

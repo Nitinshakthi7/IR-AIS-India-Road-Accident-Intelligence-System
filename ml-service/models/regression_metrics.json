@@ -1,0 +1,44 @@
+{
+  "Linear Regression": {
+    "mae": 0.6829,
+    "mse": 1.0835,
+    "rmse": 1.0409,
+    "r2": 0.035,
+    "approach": "(Native Features)"
+  },
+  "Ridge Regression": {
+    "mae": 0.6831,
+    "mse": 1.0838,
+    "rmse": 1.0411,
+    "r2": 0.0347,
+    "approach": "(Native Features)"
+  },
+  "Lasso": {
+    "mae": 0.6841,
+    "mse": 1.0845,
+    "rmse": 1.0414,
+    "r2": 0.034,
+    "approach": "(Native Features)"
+  },
+  "SVR": {
+    "mae": 0.6531,
+    "mse": 1.1046,
+    "rmse": 1.051,
+    "r2": 0.0161,
+    "approach": "(Native Features)"
+  },
+  "Decision Tree": {
+    "mae": 0.6554,
+    "mse": 1.0295,
+    "rmse": 1.0146,
+    "r2": 0.083,
+    "approach": "(Native Features)"
+  },
+  "Random Forest": {
+    "mae": 0.6248,
+    "mse": 0.9167,
+    "rmse": 0.9574,
+    "r2": 0.1836,
+    "approach": "(Native Features)"
+  }
+}

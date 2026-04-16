@@ -1,0 +1,173 @@
+{
+  "severity_distribution": {
+    "Slight Injury": 10415,
+    "Serious Injury": 1743,
+    "Fatal injury": 158
+  },
+  "hour_distribution": {
+    "0": 206,
+    "1": 134,
+    "2": 84,
+    "3": 84,
+    "4": 91,
+    "5": 76,
+    "6": 214,
+    "7": 532,
+    "8": 828,
+    "9": 559,
+    "10": 500,
+    "11": 603,
+    "12": 691,
+    "13": 772,
+    "14": 639,
+    "15": 874,
+    "16": 921,
+    "17": 1228,
+    "18": 956,
+    "19": 708,
+    "20": 604,
+    "21": 401,
+    "22": 402,
+    "23": 209
+  },
+  "day_distribution": {
+    "Friday": 2041,
+    "Thursday": 1851,
+    "Wednesday": 1840,
+    "Tuesday": 1770,
+    "Monday": 1681,
+    "Saturday": 1666,
+    "Sunday": 1467
+  },
+  "weather_severity_cross": {
+    "Cloudy": {
+      "Fatal injury": 0,
+      "Serious Injury": 8,
+      "Slight Injury": 117
+    },
+    "Fog or mist": {
+      "Fatal injury": 0,
+      "Serious Injury": 1,
+      "Slight Injury": 9
+    },
+    "Normal": {
+      "Fatal injury": 135,
+      "Serious Injury": 1474,
+      "Slight Injury": 8454
+    },
+    "Other": {
+      "Fatal injury": 0,
+      "Serious Injury": 28,
+      "Slight Injury": 268
+    },
+    "Raining": {
+      "Fatal injury": 23,
+      "Serious Injury": 158,
+      "Slight Injury": 1150
+    },
+    "Raining and Windy": {
+      "Fatal injury": 0,
+      "Serious Injury": 2,
+      "Slight Injury": 38
+    },
+    "Snow": {
+      "Fatal injury": 0,
+      "Serious Injury": 5,
+      "Slight Injury": 56
+    },
+    "Windy": {
+      "Fatal injury": 0,
+      "Serious Injury": 16,
+      "Slight Injury": 82
+    }
+  },
+  "age_severity_cross": {
+    "18-30": {
+      "Fatal injury": 62,
+      "Serious Injury": 604,
+      "Slight Injury": 3605
+    },
+    "31-50": {
+      "Fatal injury": 54,
+      "Serious Injury": 541,
+      "Slight Injury": 3492
+    },
+    "Over 51": {
+      "Fatal injury": 24,
+      "Serious Injury": 257,
+      "Slight Injury": 1304
+    },
+    "Under 18": {
+      "Fatal injury": 12,
+      "Serious Injury": 169,
+      "Slight Injury": 644
+    }
+  },
+  "vehicle_type_distribution": {
+    "Automobile": 3205,
+    "Lorry (41?100Q)": 2186,
+    "Other": 1208,
+    "Pick up upto 10Q": 811,
+    "Public (12 seats)": 711,
+    "Stationwagen": 687,
+    "Lorry (11?40Q)": 541,
+    "Public (13?45 seats)": 532,
+    "Public (> 45 seats)": 404,
+    "Long lorry": 383
+  },
+  "cause_distribution": {
+    "No distancing": 2263,
+    "Changing lane to the right": 1808,
+    "Changing lane to the left": 1473,
+    "Driving carelessly": 1402,
+    "No priority to vehicle": 1207,
+    "Moving Backward": 1137,
+    "No priority to pedestrian": 721,
+    "Other": 456,
+    "Overtaking": 430,
+    "Driving under the influence of drugs": 340
+  },
+  "pedestrian_distribution": {
+    "Pedestrian Involved": 926,
+    "Vehicle Only": 11390
+  },
+  "collision_distribution": {
+    "Vehicle with vehicle collision": 8774,
+    "Collision with roadside objects": 1786,
+    "Collision with pedestrians": 896,
+    "Rollover": 397,
+    "Collision with animals": 171,
+    "Collision with roadside-parked vehicles": 54,
+    "Fall from vehicles": 34,
+    "Other": 26,
+    "With Train": 9
+  },
+  "defect_distribution": {
+    "No defect": 7853,
+    "Defective": 36
+  },
+  "area_distribution": {
+    "Other": 3819,
+    "Office areas": 3451,
+    "Residential areas": 2060,
+    " Church areas": 1060,
+    " Industrial areas": 456,
+    "School areas": 415,
+    "  Recreational areas": 327,
+    " Outside rural areas": 218,
+    " Hospital areas": 121,
+    "  Market areas": 63
+  },
+  "casualty_distribution": {
+    "1": 8397,
+    "2": 2290,
+    "3": 909,
+    "4": 394,
+    "5": 207,
+    "6": 89,
+    "7": 22,
+    "8": 8
+  },
+  "total_records": 12316,
+  "feature_count": 26
+}

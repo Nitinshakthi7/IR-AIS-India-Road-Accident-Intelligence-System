@@ -1,0 +1,14 @@
+{
+  "K-Means": {
+    "silhouette_score": 0.0732,
+    "davies_bouldin": 3.6879,
+    "n_clusters": 3,
+    "approach": "optimized"
+  },
+  "DBSCAN": {
+    "silhouette_score": -1.0,
+    "davies_bouldin": -1.0,
+    "n_clusters": 0,
+    "approach": "optimized"
+  }
+}

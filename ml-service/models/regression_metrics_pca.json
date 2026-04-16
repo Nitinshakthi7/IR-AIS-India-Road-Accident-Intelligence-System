@@ -1,0 +1,44 @@
+{
+  "Linear Regression": {
+    "mae": 0.6838,
+    "mse": 1.0838,
+    "rmse": 1.041,
+    "r2": 0.0347,
+    "approach": "(PCA Reduced)"
+  },
+  "Ridge Regression": {
+    "mae": 0.684,
+    "mse": 1.0841,
+    "rmse": 1.0412,
+    "r2": 0.0344,
+    "approach": "(PCA Reduced)"
+  },
+  "Lasso": {
+    "mae": 0.6844,
+    "mse": 1.0846,
+    "rmse": 1.0414,
+    "r2": 0.034,
+    "approach": "(PCA Reduced)"
+  },
+  "SVR": {
+    "mae": 0.6527,
+    "mse": 1.1103,
+    "rmse": 1.0537,
+    "r2": 0.0111,
+    "approach": "(PCA Reduced)"
+  },
+  "Decision Tree": {
+    "mae": 0.7078,
+    "mse": 1.1349,
+    "rmse": 1.0653,
+    "r2": -0.0108,
+    "approach": "(PCA Reduced)"
+  },
+  "Random Forest": {
+    "mae": 0.6821,
+    "mse": 1.0709,
+    "rmse": 1.0348,
+    "r2": 0.0462,
+    "approach": "(PCA Reduced)"
+  }
+}

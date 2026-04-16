@@ -1,0 +1,6 @@
+{
+  "best_classifier_name": "Random Forest (SMOTE)",
+  "best_classifier_f1": 0.7856,
+  "best_regressor_name": "Random Forest",
+  "best_regressor_r2": 0.1836
+}
