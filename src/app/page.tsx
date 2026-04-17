@@ -507,8 +507,8 @@ function DashboardTab() {
               <span>Exploratory Data Analysis</span>
             </div>
             <h2 className="editorial-title mb-6 leading-[1.1]">
-              Deciphering the <br/>
-              <span className="text-primary italic">Geometry</span> of Risk.
+              Uncovering Patterns in <br/>
+              <span className="text-primary italic">Road Safety</span> Data.
             </h2>
             <p className="text-lg font-medium text-black/60 max-w-lg leading-relaxed">
               Analyzing <span className="text-black font-bold underline decoration-primary decoration-4 underline-offset-4">{edaData.total_records.toLocaleString()}</span> road accident records across India to identify critical patterns.
