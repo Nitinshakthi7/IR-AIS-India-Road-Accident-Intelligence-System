@@ -1,0 +1,26 @@
+# Dependencies
+node_modules
+.next
+
+# Dev files
+.git
+.gitignore
+.vscode
+README.md
+
+# Python cache
+__pycache__
+*.py[cod]
+*.egg-info
+venv/
+.venv/
+
+# ML artifacts that are regenerated (keep models/ folder)
+ml-service/scratch/
+outputs/
+
+# Misc
+.DS_Store
+*.log
+.env*
+upload/
