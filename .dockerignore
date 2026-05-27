@@ -22,4 +22,3 @@ outputs/
 .DS_Store
 *.log
 .env*
-upload/
