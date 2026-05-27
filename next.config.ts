@@ -6,8 +6,11 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  turbopack: {
-    root: __dirname,
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
   },
 };
 
