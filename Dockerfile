@@ -1,36 +1,25 @@
-# ── Stage 1: Python dependencies ─────────────────────────────────────────────
-FROM python:3.11-slim AS python-deps
+# ── Stage 1: Build Next.js frontend ──────────────────────────────────────────
+FROM node:20-slim AS next-builder
+WORKDIR /app
+COPY package*.json ./
+# Install all dependencies including devDependencies needed to build Next.js
+RUN npm ci
+COPY . .
+# Build Next.js (generates .next/standalone and copies static/public via postbuild script)
+RUN npm run build
 
+# ── Stage 2: Train ML Models ──────────────────────────────────────────────────
+FROM python:3.11-slim AS ml-builder
 WORKDIR /app
 COPY ml-service/requirements.txt ./ml-service/requirements.txt
 RUN pip install --no-cache-dir -r ml-service/requirements.txt
+COPY ml-service ./ml-service
+COPY upload ./upload
+# Run the training pipeline to generate the model artifacts (.pkl & .json)
+RUN python ml-service/train_models.py
 
-# ── Stage 2: Build Next.js ────────────────────────────────────────────────────
-FROM node:20-slim AS builder
-
-WORKDIR /app
-
-COPY package.json package-lock.json* ./
-RUN npm ci --prefer-offline
-
-COPY . .
-
-ENV NODE_OPTIONS="--max-old-space-size=4096"
-ENV NEXT_TELEMETRY_DISABLED=1
-# Skip TS and ESLint errors during Docker build
-ENV NEXT_SKIP_TYPE_CHECK=1
-
-RUN npm run build
-
-# ── Stage 3: Production image ─────────────────────────────────────────────────
+# ── Stage 3: Assemble Production Runner ───────────────────────────────────────
 FROM node:20-slim AS runner
-
-RUN apt-get update && apt-get install -y \
-    python3 \
-    python3-pip \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
 WORKDIR /app
 
 ENV NODE_ENV=production
@@ -38,14 +27,25 @@ ENV PORT=8080
 ENV HOSTNAME=0.0.0.0
 ENV NEXT_TELEMETRY_DISABLED=1
 
-COPY --from=python-deps /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
+# Install Python runtime and pip in runner image
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy pre-installed Python packages from ml-builder stage
+COPY --from=ml-builder /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
 RUN ln -sf /usr/bin/python3 /usr/bin/python3
 
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/ml-service ./ml-service
+# Copy Next.js standalone server and static assets from next-builder stage
+COPY --from=next-builder /app/.next/standalone ./
+COPY --from=next-builder /app/.next/static ./.next/static
+COPY --from=next-builder /app/public ./public
+
+# Copy pre-trained ML models and services from ml-builder stage
+COPY --from=ml-builder /app/ml-service ./ml-service
 
 EXPOSE 8080
-
 CMD ["node", "server.js"]
+
