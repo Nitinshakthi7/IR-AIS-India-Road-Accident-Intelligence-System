@@ -3,13 +3,13 @@
 import React from "react";
 import Image from "next/image";
 import { Activity, ArrowRight, MousePointerClick } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export function LandingHero() {
-  const scrollToContent = () => {
-    const main = document.querySelector("main");
-    if (main) {
-      main.scrollIntoView({ behavior: "smooth" });
-    }
+  const router = useRouter();
+
+  const handleEnterDashboard = () => {
+    router.push("/?tab=dashboard");
   };
 
   return (
@@ -47,7 +47,7 @@ export function LandingHero() {
               style={{ animationDelay: "0.3s" }}
             >
               <button
-                onClick={scrollToContent}
+                onClick={handleEnterDashboard}
                 className="fp-button fp-button-primary scale-110 !px-8 !py-4"
               >
                 Enter Dashboard
