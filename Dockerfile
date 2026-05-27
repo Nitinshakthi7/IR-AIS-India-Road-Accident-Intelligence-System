@@ -1,9 +1,12 @@
 # ── Stage 1: Build Next.js frontend ──────────────────────────────────────────
 FROM node:20-slim AS next-builder
 WORKDIR /app
-COPY package*.json ./
-# Install ALL deps including devDependencies (tailwindcss, @tailwindcss/postcss, tw-animate-css, etc.)
-# --legacy-peer-deps avoids peer resolution conflicts between packages
+# Copy ONLY package.json — NOT package-lock.json.
+# The lockfile was generated on Windows and contains Windows-native binary paths
+# (lightningcss-win32, @next/swc-win32, etc.) that will crash on Linux.
+# Without the lockfile, npm resolves fresh and downloads correct Linux binaries.
+COPY package.json ./
+# Install all deps including devDependencies needed for the build
 RUN npm install --include=dev --legacy-peer-deps
 COPY . .
 # Increase Node heap size for large Next.js builds; build the app
