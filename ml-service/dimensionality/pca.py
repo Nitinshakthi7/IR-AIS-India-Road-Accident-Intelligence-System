@@ -4,6 +4,8 @@ IR-AIS Dimensionality Reduction — PCA
 """
 
 from sklearn.decomposition import PCA
+import matplotlib
+matplotlib.use('Agg')  # Headless backend — required in Docker (no display)
 import matplotlib.pyplot as plt
 import os
 import json

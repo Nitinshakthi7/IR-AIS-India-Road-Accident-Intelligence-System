@@ -10,6 +10,8 @@ import json
 import warnings
 import numpy as np
 import pandas as pd
+import matplotlib
+matplotlib.use('Agg')  # Headless backend — required in Docker (no display)
 import matplotlib.pyplot as plt
 from collections import Counter
 from sklearn.model_selection import train_test_split
